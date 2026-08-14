@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "lnb": {
+      "type": "http",
+      "url": "https://mcp.lnb-mcp.workers.dev/mcp"
+    }
+  }
+}

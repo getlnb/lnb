@@ -1,0 +1,12 @@
+{
+  "name": "lnb",
+  "owner": { "name": "LNB", "url": "https://getlnb.pages.dev" },
+  "plugins": [
+    {
+      "name": "lnb",
+      "source": "./",
+      "description": "Market intelligence for teams: evidence-backed vendor, pain-point, trend, and market-size research captured to a shared workspace.",
+      "version": "0.2.0"
+    }
+  ]
+}
