@@ -60,3 +60,36 @@ gives Claude the same playbooks.
   a buyer. Pricing is captured from public pages only.
 - **Collect, don't conclude.** The tool surfaces evidence; humans draw the
   conclusions.
+
+## Releases
+
+Versioning is automated. Don't edit version numbers by hand — CI owns them.
+
+Commit messages follow
+[Conventional Commits](https://www.conventionalcommits.org/):
+
+```
+fix: correct the MCP server URL          → patch  (0.2.0 → 0.2.1)
+feat: add a marketplace description      → minor  (0.2.0 → 0.3.0)
+feat!: require Claude Code 2.x           → major  (0.2.x → 1.0.0)
+chore: / docs: / ci: / refactor:         → no release
+```
+
+A breaking change is either a `!` after the type or a `BREAKING CHANGE:` line
+in the commit body.
+
+On every push to `main`, `.github/workflows/release.yml` runs
+[semantic-release](https://semantic-release.gitbook.io/), which:
+
+1. reads the commits since the last `v*` tag and picks the bump,
+2. writes the new version into `.claude-plugin/plugin.json` and
+   `.claude-plugin/marketplace.json` (via `scripts/set-version.mjs`),
+3. updates `CHANGELOG.md`,
+4. commits that as `chore(release): <version> [skip ci]`, tags `v<version>`,
+   and publishes a GitHub Release.
+
+Nothing is published to npm — the plugin is consumed straight from this repo.
+
+Pull requests are commit-linted (`.github/workflows/commitlint.yml`). There are
+no local git hooks; if you want the same check before pushing, run
+`npm install && npx commitlint --from origin/main`.

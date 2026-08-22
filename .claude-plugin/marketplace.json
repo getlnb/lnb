@@ -1,6 +1,9 @@
 {
   "name": "lnb",
-  "owner": { "name": "LNB", "url": "https://getlnb.pages.dev" },
+  "owner": {
+    "name": "LNB",
+    "url": "https://getlnb.pages.dev"
+  },
   "plugins": [
     {
       "name": "lnb",
