@@ -1,0 +1,4 @@
+node_modules/
+# Dev-only tooling deps (semantic-release, commitlint). Not committed to keep
+# this 5-file plugin repo readable; CI uses `npm install`.
+package-lock.json

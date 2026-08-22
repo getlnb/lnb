@@ -3,6 +3,8 @@
   "displayName": "LNB — Market Intelligence",
   "version": "0.2.0",
   "description": "Turn Claude into your team's market-intelligence analyst. Structured, evidence-backed research on vendors, pain points, trends, and market sizing — captured to your team's shared LNB workspace.",
-  "author": { "name": "LNB" },
+  "author": {
+    "name": "LNB"
+  },
   "mcpServers": "./.mcp.json"
 }
