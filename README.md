@@ -21,9 +21,14 @@ Or run it yourself:
 ```
 
 On first use, the LNB server will ask you to sign in with GitHub (Claude
-opens the browser, or shows you a link). A personal workspace is created
-automatically; create a team org and share its invite code with teammates
-(`create_org` / `join_org`).
+opens the browser, or shows you a link). If a teammate has already added you to
+their workspace, you land in it straight away. Otherwise Claude will offer to
+create one (`create_org`), or you can join an existing one with its invite code
+(`join_org`).
+
+To bring in teammates, `invite_member` seeds someone by GitHub username or
+email address, so they land in your workspace the first time they sign in —
+nothing for them to paste.
 
 ## Capture from your phone
 
