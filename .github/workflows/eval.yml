@@ -1,0 +1,65 @@
+name: eval
+
+# Behavioural regression tests for the plugin's prompt surface. The plugin ships
+# no code, so the only way its instructions can regress is silently — a reworded
+# line in the MCP server's `instructions` that stops an agent citing its sources
+# looks like a harmless copy edit in a diff.
+#
+# Manual by default. Each run drives real models and costs real money (~$1.30
+# for the suite at 2 runs per case), so it is not wired to every push; run it
+# when the server's instructions, playbooks or tool descriptions change.
+on:
+  workflow_dispatch:
+    inputs:
+      runs:
+        description: Runs per case per arm (more runs, less noise)
+        default: "2"
+  schedule:
+    # Weekly, to catch drift from model updates rather than from our own edits.
+    - cron: "0 7 * * 1"
+
+jobs:
+  eval:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - run: npm install -g @anthropic-ai/claude-code@latest
+
+      - name: Run the eval suite
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          claude plugin eval . \
+            --runs "${{ inputs.runs || 2 }}" \
+            --trust-plugin \
+            --no-publish \
+            --json results.json \
+            --threshold 0.8 \
+            --max-cost-usd 10 \
+            --concurrency 2 \
+            --allow-tools "mcp__plugin_lnb_lnb__*"
+
+      - name: Summarise
+        if: always()
+        run: |
+          # A partial run (cost ceiling, auth failure) scores low for reasons
+          # that have nothing to do with the plugin, so it must not read as a
+          # behavioural regression.
+          if [ "$(jq -r '.partial' results.json)" = "true" ]; then
+            echo "::warning::partial run: $(jq -r '.partialReason' results.json)"
+          fi
+          jq -r '"score \(.aggregates.overallScore) · \(.aggregates.casesPassed)/\(.aggregates.casesTotal) cases · plugin effect \(.aggregates.meanDelta)"' results.json >> "$GITHUB_STEP_SUMMARY"
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: eval-report
+          path: |
+            results.json
+            evals/results/*/report.html

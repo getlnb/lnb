@@ -1,0 +1,4 @@
+---
+type: fixed
+---
+{"type":"object","required":["id","name","category","provenance","last_updated"],"properties":{"id":{"type":"string"},"name":{"type":"string"},"category":{"type":"string"},"summary":{"type":"string"},"provenance":{"enum":["published","model_inferred","mixed"]},"pricing":{"type":"object","properties":{"model":{"enum":["subscription","perpetual","custom_quote","free","unknown"]},"tiers":{"type":"array"}}},"sources":{"type":"array","items":{"type":"object","required":["url","accessed","source_type"],"properties":{"url":{"type":"string"},"accessed":{"type":"string"},"source_type":{"enum":["peer_reviewed","sector_body","government","industry_report","conference","vendor_material","press","forum_or_community","blog","other"]},"claim":{"type":"string"},"quote":{"type":"string"}}}},"last_updated":{"type":"string"}}}
