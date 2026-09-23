@@ -1,0 +1,7 @@
+{
+  "name": "lnb-desktop-bundle",
+  "private": true,
+  "version": "0.2.0",
+  "description": "stdio->remote bridge vendored into the Claude Desktop bundle",
+  "dependencies": { "mcp-remote": "^0.1.29" }
+}

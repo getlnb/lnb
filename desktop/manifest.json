@@ -1,0 +1,42 @@
+{
+  "manifest_version": "0.2",
+  "name": "lnb",
+  "display_name": "LNB \u2014 Market Intelligence",
+  "version": "0.2.0",
+  "description": "Turn Claude into your team's market-intelligence analyst. Evidence-cited research on vendors, pain points, trends and market sizing, captured to a shared workspace.",
+  "long_description": "LNB is a shared market-intelligence workspace. Ask Claude to research a vendor, mine pain points, size a market or brief the team, and every finding is saved as a structured, evidence-cited entry your whole team can see on a live dashboard.\n\nThis bundle connects Claude Desktop to the hosted LNB server and carries everything it needs. On first use it opens a browser to sign you in; a personal workspace is created automatically, and you can join a team workspace with its invite code.",
+  "author": {
+    "name": "LNB",
+    "url": "https://getlnb.pages.dev"
+  },
+  "homepage": "https://getlnb.pages.dev",
+  "documentation": "https://github.com/getlnb/lnb",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/getlnb/lnb"
+  },
+  "keywords": [
+    "market research",
+    "competitive intelligence",
+    "vendors",
+    "evidence"
+  ],
+  "license": "MIT",
+  "server": {
+    "type": "node",
+    "entry_point": "server/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": [
+        "${__dirname}/server/index.js"
+      ]
+    }
+  },
+  "compatibility": {
+    "platforms": [
+      "darwin",
+      "win32",
+      "linux"
+    ]
+  }
+}

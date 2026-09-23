@@ -3,3 +3,5 @@ node_modules/
 # this 5-file plugin repo readable; CI uses `npm install`.
 package-lock.json
 evals/results/
+lnb.mcpb
+desktop/server/node_modules/
